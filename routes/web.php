@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AssignmentController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ScheduleController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -16,6 +17,8 @@ Route::get('/', function () {
 })->name("home");
 
 Route::get('/tugas', [AssignmentController::class, 'index'])->name('assignment');
+
+Route::get('/jadwal-kuliah', [ScheduleController::class, 'index'])->name('schedule');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
