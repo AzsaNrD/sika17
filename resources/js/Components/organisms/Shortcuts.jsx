@@ -34,7 +34,7 @@ export default function Shortcuts() {
                 ].map((item, index) => (
                     <a
                         key={index}
-                        className="min-w-56 text-slate-grey font-medium text-center bg-lilac-grey hover:bg-[#FDFBFF] transition-all duration-200 shadow-universal py-4 rounded-[5px] flex items-center justify-center gap-2"
+                        className="min-w-56 text-slate-grey font-medium text-center bg-lilac-grey hover:bg-[#FDFBFF] transition-all duration-200 shadow-universal rounded-[5px] py-4  flex items-center justify-center gap-2"
                         href={item.link}
                         target="_blank"
                     >

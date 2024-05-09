@@ -1,6 +1,29 @@
 import { Link } from "@inertiajs/react";
 import { LuLogIn } from "react-icons/lu";
 
+const urls = [
+    {
+        title: "Beranda",
+        name: "home",
+        link: "/",
+    },
+    {
+        title: "Tugas",
+        name: "assignment",
+        link: "/tugas",
+    },
+    {
+        title: "Jadwal Kuliah",
+        name: "schedule",
+        link: "/jadwal-kuliah",
+    },
+    {
+        title: "Mata Kuliah",
+        name: "course",
+        link: "/mata-kuliah",
+    },
+];
+
 export default function Navbar() {
     return (
         <nav className="bg-lilac-grey shadow-nav">
@@ -16,46 +39,19 @@ export default function Navbar() {
                             </Link>
                         </div>
                         <div className="flex items-center gap-10 text-slate-grey">
-                            <Link
-                                href="/"
-                                className={
-                                    route().current("home")
-                                        ? "text-blue-violet"
-                                        : "hover:text-blue-violet transition-all duration-200"
-                                }
-                            >
-                                Beranda
-                            </Link>
-                            <Link
-                                href="/tugas"
-                                className={
-                                    route().current("assignment")
-                                        ? "text-blue-violet"
-                                        : "hover:text-blue-violet transition-all duration-200"
-                                }
-                            >
-                                Tugas
-                            </Link>
-                            <Link
-                                href="/jadwal-kuliah"
-                                className={
-                                    route().current("schedule")
-                                        ? "text-blue-violet"
-                                        : "hover:text-blue-violet transition-all duration-200"
-                                }
-                            >
-                                Jadwal Kuliah
-                            </Link>
-                            <Link
-                                href="/mata-kuliah"
-                                className={
-                                    route().current("course")
-                                        ? "text-blue-violet"
-                                        : "hover:text-blue-violet transition-all duration-200"
-                                }
-                            >
-                                Mata Kuliah
-                            </Link>
+                            {urls.map((item, index) => (
+                                <Link
+                                    key={index}
+                                    href={item.link}
+                                    className={
+                                        route().current(item.name)
+                                            ? "text-blue-violet"
+                                            : "hover:text-blue-violet transition-all duration-200"
+                                    }
+                                >
+                                    {item.title}
+                                </Link>
+                            ))}
                         </div>
                         <div>
                             <Link

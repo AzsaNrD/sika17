@@ -9,7 +9,7 @@ export default function Footer() {
                     <h3 className="font-anonymous font-bold text-2xl text-gunmetal">
                         SIKA17
                     </h3>
-                    <p className="text-gunmetal mt-2">
+                    <p className="text-slate-grey mt-2">
                         &copy; {new Date().getFullYear()} SIKA17. All rights
                         reserved.{" "}
                     </p>

@@ -46,7 +46,7 @@ export default function Announcements() {
                             </div>
                             <div>
                                 <Link
-                                    className="text-blue-violet bg-lilac hover:bg-[#E2D1F9] transition-all duration-200 py-2 px-4 rounded-[5px] text-sm"
+                                    className="text-blue-violet bg-lilac hover:bg-[#E2D1F9] transition-all duration-200 rounded-[5px] py-2 px-4  text-sm"
                                     href={item.link}
                                 >
                                     Lihat Detail
