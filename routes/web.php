@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AssignmentController;
+use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ScheduleController;
 use Illuminate\Foundation\Application;
@@ -19,6 +20,11 @@ Route::get('/', function () {
 Route::get('/tugas', [AssignmentController::class, 'index'])->name('assignment');
 
 Route::get('/jadwal-kuliah', [ScheduleController::class, 'index'])->name('schedule');
+
+Route::prefix('mata-kuliah')->name('course.')->group(function () {
+    Route::get('/', [CourseController::class, 'index'])->name('index');
+    Route::get('/{course:semester}', [CourseController::class, 'show'])->name('show');
+});
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

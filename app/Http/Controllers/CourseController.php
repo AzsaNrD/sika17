@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Course;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class CourseController extends Controller
 {
@@ -12,7 +13,7 @@ class CourseController extends Controller
      */
     public function index()
     {
-        //
+        return Inertia::render('Course/Index');
     }
 
     /**
@@ -34,9 +35,12 @@ class CourseController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Course $course)
+    public function show($semester)
     {
-        //
+        // Course $course 
+        return Inertia::render('Course/SemesterCourse', [
+            'semester' => $semester,
+        ]);
     }
 
     /**

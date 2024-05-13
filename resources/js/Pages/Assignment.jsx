@@ -1,4 +1,4 @@
-import AssignmentCard from "@/Components/organisms/AssignmentCard";
+import AssignmentCard from "@/Components/Organisms/AssignmentCard";
 import AppLayout from "@/Layouts/AppLayout";
 import React from "react";
 

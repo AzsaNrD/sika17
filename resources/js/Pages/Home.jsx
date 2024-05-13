@@ -1,7 +1,7 @@
 import AppLayout from "@/Layouts/AppLayout";
-import Announcements from "@/Components/organisms/Announcements";
-import Shortcuts from "@/Components/organisms/Shortcuts";
-import Feedback from "@/Components/organisms/Feedback";
+import Announcements from "@/Components/Organisms/Announcements";
+import Shortcuts from "@/Components/Organisms/Shortcuts";
+import Feedback from "@/Components/Organisms/Feedback";
 
 export default function Home() {
     return (

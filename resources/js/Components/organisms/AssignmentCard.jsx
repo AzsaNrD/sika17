@@ -15,7 +15,7 @@ export default function AssignmentCard({
             <div>
                 <div>
                     <div className="flex items-center gap-2">
-                        <h3 className="font-medium text-xl text-gunmetal">
+                        <h3 className="text-xl font-medium text-gunmetal">
                             {title}
                         </h3>
                         {isPassed && (
@@ -24,22 +24,22 @@ export default function AssignmentCard({
                             </p>
                         )}
                     </div>
-                    <p className="mt-2 text-slate-grey text-sm">
+                    <p className="mt-2 text-sm text-slate-grey">
                         {description}
                     </p>
                 </div>
                 {isNull ? (
-                    <p className="text-sm font-light text-slate-grey mt-8">
+                    <p className="mt-8 text-sm font-light text-slate-grey">
                         Tugas ini belum memiliki batas waktu penyelesaian yang
                         ditetapkan.
                     </p>
                 ) : (
-                    <div className="mt-8 flex gap-4">
-                        <div className="text-slate-grey flex gap-2 items-center">
+                    <div className="flex gap-4 mt-8">
+                        <div className="flex items-center gap-2 text-slate-grey">
                             <PiCalendarBlank className="text-base" />
                             <p className="text-sm">{date}</p>
                         </div>
-                        <div className="text-slate-grey flex gap-2 items-center">
+                        <div className="flex items-center gap-2 text-slate-grey">
                             <PiClockCountdown className="text-base" />
                             <p className="text-sm">{time}</p>
                         </div>
@@ -48,7 +48,7 @@ export default function AssignmentCard({
             </div>
             <div>
                 <a
-                    className="text-blue-violet bg-lilac hover:bg-[#E2D1F9] transition-all duration-200 rounded-[5px] py-2 px-4  text-sm"
+                    className="text-blue-violet bg-lilac hover:bg-[#E2D1F9] transition-all duration-200 rounded-[5px] py-2 px-4 text-sm"
                     href={submission_link}
                     target="_blank"
                     rel="noopener noreferrer"
