@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AnnouncementsController;
 use App\Http\Controllers\AssignmentController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ProfileController;
@@ -25,6 +26,8 @@ Route::prefix('mata-kuliah')->name('course.')->group(function () {
     Route::get('/', [CourseController::class, 'index'])->name('index');
     Route::get('/{course:semester}', [CourseController::class, 'show'])->name('show');
 });
+
+Route::get('/pengumuman/{announcement}', [AnnouncementsController::class, 'show'])->name('announcement.show');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

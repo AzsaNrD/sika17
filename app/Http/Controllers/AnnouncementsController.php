@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Announcements;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class AnnouncementsController extends Controller
 {
@@ -36,7 +37,7 @@ class AnnouncementsController extends Controller
      */
     public function show(Announcements $announcements)
     {
-        //
+        return Inertia::render("Announcement/Show");
     }
 
     /**

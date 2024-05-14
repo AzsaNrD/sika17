@@ -6,7 +6,7 @@ const urls = [
         title: "Beranda",
         name: "home",
         link: "/",
-        component: "Home",
+        component: "Announcement",
     },
     {
         title: "Tugas",
@@ -50,7 +50,7 @@ export default function Navbar() {
                                     key={index}
                                     href={route(item.name)}
                                     className={
-                                        url === item.name ||
+                                        url === item.link ||
                                         component.startsWith(item.component)
                                             ? "text-blue-violet"
                                             : "hover:text-blue-violet transition-all duration-200"
