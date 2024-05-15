@@ -14,21 +14,21 @@ export default function Announcements() {
                 {[
                     {
                         title: "Jadwal Kursus LepKom",
-                        slug: 'hello-world',
+                        slug: "hello-world",
                         link: "/tugas",
                         date: "02 Mei 2024",
                         author: "Azsa Nurwahyudi",
                     },
                     {
                         title: "Pembaruan Jadwal: Perubahan jadwal kuliah pada tanggal 15 April 2024.",
-                        slug: 'hello-world',
+                        slug: "hello-world",
                         link: "/tugas",
                         date: "02 Mei 2024",
                         author: "Azsa Nurwahyudi",
                     },
                     {
                         title: "Pengisian KRS",
-                        slug: 'hello-world',
+                        slug: "hello-world",
                         link: "/tugas",
                         date: "02 Mei 2024",
                         author: "Azsa Nurwahyudi",
