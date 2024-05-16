@@ -1,14 +1,12 @@
 import { Head, Link } from "@inertiajs/react";
-import { BiErrorAlt } from "react-icons/bi";
 import React from "react";
 
 export default function ErrorPage({ status }) {
-    console.log(status);
     const title = {
-        503: "503: Service Unavailable",
-        500: "500: Server Error",
-        404: "404: Page Not Found",
-        403: "403: Forbidden",
+        503: "503: Service Unavailable 🚧",
+        500: "500: Server Error 💥",
+        404: "404: Page Not Found 🔍",
+        403: "403: Forbidden 🔐",
     }[status];
 
     const description = {
@@ -44,7 +42,7 @@ export default function ErrorPage({ status }) {
                     {(status == 404 || status == 403) && (
                         <Link
                             href={route("home")}
-                            className="inline-block px-8 py-2 mx-auto mt-4 text-sm text-center transition-all duration-200 rounded-full text-lilac-grey bg-blue-violet hover:bg-blue-violet/90"
+                            className="inline-block px-8 py-2 mx-auto mt-8 text-sm text-center transition-all duration-200 rounded-full text-lilac-grey bg-blue-violet hover:bg-blue-violet/90"
                         >
                             Kembali ke Beranda
                         </Link>

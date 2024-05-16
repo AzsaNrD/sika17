@@ -6,7 +6,7 @@ import Feedback from "@/Components/Organisms/Feedback";
 export default function Home() {
     return (
         <AppLayout title="Beranda">
-            <main className="my-16 max-w-5xl mx-auto">
+            <main className="max-w-5xl mx-auto my-16">
                 <section>
                     <Announcements />
                 </section>
