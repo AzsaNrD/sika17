@@ -15,3 +15,15 @@ body {
 .shadow-universal {
     box-shadow: 0px 4px 4px 0px rgba(224, 199, 255, 0.25);
 }
+
+.ck.ck-toolbar.ck-toolbar_grouping {
+    @apply bg-transparent;
+}
+
+.ck-blurred.ck.ck-content.ck-editor__editable.ck-rounded-corners.ck-editor__editable_inline {
+    @apply bg-transparent;
+}
+
+.ck-content {
+    @apply max-w-full prose;
+}

@@ -13,7 +13,7 @@ export default function Dashboard({ auth }) {
         >
             <div className="py-12">
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
-                    <div className="overflow-hidden shadow-sm bg-lilac-grey sm:rounded-lg">
+                    <div className="overflow-hidden shadow-sm bg-lilac-white sm:rounded-lg">
                         <div className="p-6 text-slate-grey">
                             You're logged in!
                         </div>

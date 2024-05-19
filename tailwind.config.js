@@ -1,5 +1,6 @@
 import defaultTheme from "tailwindcss/defaultTheme";
 import forms from "@tailwindcss/forms";
+import typography from "@tailwindcss/typography";
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -12,6 +13,13 @@ export default {
 
     theme: {
         extend: {
+            typography: {
+                DEFAULT: {
+                    css: {
+                        maxWidth: "100ch",
+                    },
+                },
+            },
             fontFamily: {
                 sans: ["Mulish", ...defaultTheme.fontFamily.sans],
                 anonymous: ["Anonymous Pro", ...defaultTheme.fontFamily.sans],
@@ -31,5 +39,5 @@ export default {
         },
     },
 
-    plugins: [forms],
+    plugins: [forms, typography],
 };

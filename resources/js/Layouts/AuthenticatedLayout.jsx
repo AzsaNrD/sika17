@@ -2,11 +2,28 @@ import { useState } from "react";
 import Dropdown from "@/Components/Dropdown";
 import NavLink from "@/Components/NavLink";
 import ResponsiveNavLink from "@/Components/ResponsiveNavLink";
-import { Head, Link } from "@inertiajs/react";
+import { Head, Link, usePage } from "@inertiajs/react";
+import { RxPerson } from "react-icons/rx";
+import { IoPower } from "react-icons/io5";
+
+const urls = [
+    {
+        title: "Dashboard",
+        routeName: "dashboard.index",
+        component: "Dashboard",
+    },
+    {
+        title: "Pengumuman",
+        routeName: "dashboard.announcement.index",
+        component: "Announcement",
+    },
+];
 
 export default function Authenticated({ user, header, title, children }) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] =
         useState(false);
+
+    const { component } = usePage();
 
     return (
         <>
@@ -37,28 +54,27 @@ export default function Authenticated({ user, header, title, children }) {
                                     </Link>
                                 </div>
 
-                                {(user.role === "admin" ||
-                                    user.role === "superadmin") && (
+                                {(user.role === "Admin" ||
+                                    user.role === "Super Admin") && (
                                     <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                        <NavLink
-                                            href={route("dashboard")}
-                                            active={route().current(
-                                                "dashboard"
-                                            )}
-                                        >
-                                            Dashboard
-                                        </NavLink>
+                                        {urls.map((item, index) => (
+                                            <NavLink
+                                                key={index}
+                                                href={route(item.routeName)}
+                                                active={
+                                                    route().current(
+                                                        item.routeName
+                                                    ) ||
+                                                    component.startsWith(
+                                                        item.component
+                                                    )
+                                                }
+                                            >
+                                                {item.title}
+                                            </NavLink>
+                                        ))}
                                     </div>
                                 )}
-{/* 
-                                <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                    <NavLink
-                                        href={route("dashboard")}
-                                        active={route().current("dashboard")}
-                                    >
-                                        Dashboard
-                                    </NavLink>
-                                </div> */}
                             </div>
 
                             <div className="hidden sm:flex sm:items-center sm:ms-6">
@@ -70,7 +86,18 @@ export default function Authenticated({ user, header, title, children }) {
                                                     type="button"
                                                     className="inline-flex items-center px-3 py-2 font-medium leading-4 transition duration-150 ease-in-out border border-transparent rounded-md text-slate-grey hover:text-gunmetal focus:outline-none"
                                                 >
-                                                    {user.name}
+                                                    <span>{user.name}</span>
+                                                    {user.role === "Admin" && (
+                                                        <span className="px-2 py-1 text-xs font-semibold text-white bg-blue-500 rounded-full ms-2">
+                                                            Admin
+                                                        </span>
+                                                    )}
+                                                    {user.role ===
+                                                        "Super Admin" && (
+                                                        <span className="px-2 py-1 text-xs font-semibold text-white rounded-full bg-violet-500 ms-2">
+                                                            Super Admin
+                                                        </span>
+                                                    )}
 
                                                     <svg
                                                         className="ms-2 -me-0.5 h-4 w-4"
@@ -91,15 +118,20 @@ export default function Authenticated({ user, header, title, children }) {
                                         <Dropdown.Content>
                                             <Dropdown.Link
                                                 href={route("profile.edit")}
+                                                className="flex items-center gap-2"
                                             >
+                                                <RxPerson />
                                                 Profile
                                             </Dropdown.Link>
+                                            <hr className="my-2" />
                                             <Dropdown.Link
                                                 href={route("logout")}
                                                 method="post"
                                                 as="button"
+                                                className="flex items-center gap-2"
                                             >
-                                                Log Out
+                                                <IoPower />
+                                                Logout
                                             </Dropdown.Link>
                                         </Dropdown.Content>
                                     </Dropdown>
@@ -155,19 +187,38 @@ export default function Authenticated({ user, header, title, children }) {
                             " sm:hidden"
                         }
                     >
-                        <div className="pt-2 pb-3 space-y-1">
-                            <ResponsiveNavLink
-                                href={route("dashboard")}
-                                active={route().current("dashboard")}
-                            >
-                                Dashboard
-                            </ResponsiveNavLink>
-                        </div>
+                        {(user.role === "Admin" ||
+                            user.role === "Super Admin") && (
+                            <div className="pt-2 pb-3 space-y-1">
+                                {urls.map((item, index) => (
+                                    <ResponsiveNavLink
+                                        key={index}
+                                        href={route(item.routeName)}
+                                        active={
+                                            route().current(item.routeName) ||
+                                            component.startsWith(item.component)
+                                        }
+                                    >
+                                        {item.title}
+                                    </ResponsiveNavLink>
+                                ))}
+                            </div>
+                        )}
 
                         <div className="pt-4 pb-1 border-t border-gray-200">
                             <div className="px-4">
                                 <div className="text-base font-medium text-gray-800">
                                     {user.name}
+                                    {user.role === "admin" && (
+                                        <span className="px-2 py-1 text-xs font-semibold text-white bg-blue-500 rounded-full ms-2">
+                                            Admin
+                                        </span>
+                                    )}
+                                    {user.role === "Super Admin" && (
+                                        <span className="px-2 py-1 text-xs font-semibold text-white rounded-full bg-violet-500 ms-2">
+                                            Super Admin
+                                        </span>
+                                    )}
                                 </div>
                                 <div className="text-sm font-medium text-gray-500">
                                     {user.email}
@@ -183,7 +234,7 @@ export default function Authenticated({ user, header, title, children }) {
                                     href={route("logout")}
                                     as="button"
                                 >
-                                    Log Out
+                                    Logout
                                 </ResponsiveNavLink>
                             </div>
                         </div>
@@ -191,7 +242,7 @@ export default function Authenticated({ user, header, title, children }) {
                 </nav>
 
                 {header && (
-                    <header className="shadow bg-lilac-grey">
+                    <header className="shadow-universal bg-lilac-grey">
                         <div className="px-4 py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
                             {header}
                         </div>

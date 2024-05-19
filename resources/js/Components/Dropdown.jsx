@@ -30,7 +30,7 @@ const Trigger = ({ children }) => {
     );
 };
 
-const Content = ({ align = 'right', width = '48', contentClasses = 'py-1 bg-lilac-grey', children }) => {
+const Content = ({ align = 'right', width = '48', contentClasses = 'p-2 bg-lilac-grey', children }) => {
     const { open, setOpen } = useContext(DropDownContext);
 
     let alignmentClasses = 'origin-top';
@@ -75,7 +75,7 @@ const DropdownLink = ({ className = '', children, ...props }) => {
         <Link
             {...props}
             className={
-                'block w-full px-4 py-2 text-start text-sm leading-5 text-gunmetal bg-lilac-grey hover:bg-[#FDFBFF] focus:outline-none transition duration-150 ease-in-out ' +
+                'block w-full px-2 py-2 text-start text-sm leading-5 text-slate-grey bg-lilac-grey hover:bg-lilac hover:text-blue-violet focus:outline-none transition duration-150 ease-in-out ' +
                 className
             }
         >

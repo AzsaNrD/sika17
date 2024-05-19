@@ -17,7 +17,7 @@ class Role
     {
         $user = auth()->user();
 
-        if (!$user || ($user->role !== $role && $user->role !== 'superadmin')) {
+        if (!$user || ($user->role !== $role && $user->role !== 'Super Admin')) {
             abort(403);
         }
 

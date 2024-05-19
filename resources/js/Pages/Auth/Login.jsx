@@ -6,7 +6,7 @@ import InputLabel from "@/Components/InputLabel";
 import PrimaryButton from "@/Components/PrimaryButton";
 import TextInput from "@/Components/TextInput";
 import { Link, useForm } from "@inertiajs/react";
-import BackButton from "@/Components/Molecules/BackButton";
+import BackButton from "@/Components/Atoms/BackButton";
 
 export default function Login({ status, canResetPassword }) {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -115,7 +115,7 @@ export default function Login({ status, canResetPassword }) {
                 </p>
             </div>
 
-            <div className="mx-auto sm:max-w-xl">
+            <div className="mx-2 sm:mx-auto sm:max-w-xl">
                 <BackButton href={route("home")} label="Kembali ke beranda" />
             </div>
         </GuestLayout>
