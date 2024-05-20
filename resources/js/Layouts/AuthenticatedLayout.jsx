@@ -17,6 +17,11 @@ const urls = [
         routeName: "dashboard.announcement.index",
         component: "Announcement",
     },
+    {
+        title: "Menu Pintasan",
+        routeName: "dashboard.shortcut.index",
+        component: "Shortcut",
+    },
 ];
 
 export default function Authenticated({ user, header, title, children }) {

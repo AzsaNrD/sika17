@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Shortcut;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class ShortcutController extends Controller
 {
@@ -12,7 +13,9 @@ class ShortcutController extends Controller
      */
     public function index()
     {
-        //
+        return Inertia::render('Shortcut/Index', [
+            'shortcuts' => Shortcut::paginate(10),
+        ]);
     }
 
     /**
@@ -20,7 +23,7 @@ class ShortcutController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Shortcut/Create');
     }
 
     /**
@@ -28,7 +31,14 @@ class ShortcutController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'title' => 'required|string|max:255|min:3',
+            'url' => 'required|string|max:255|url:http,https',
+        ]);
+
+        Shortcut::create($validated);
+
+        return redirect()->route('dashboard.shortcut.index');
     }
 
     /**
@@ -44,7 +54,9 @@ class ShortcutController extends Controller
      */
     public function edit(Shortcut $shortcut)
     {
-        //
+        return Inertia::render('Shortcut/Edit', [
+            'shortcut' => $shortcut,
+        ]);
     }
 
     /**
@@ -52,7 +64,14 @@ class ShortcutController extends Controller
      */
     public function update(Request $request, Shortcut $shortcut)
     {
-        //
+        $validated = $request->validate([
+            'title' => 'required|string|max:255|min:3',
+            'url' => 'required|string|max:255|url:http,https',
+        ]);
+
+        $shortcut->update($validated);
+
+        return redirect()->route('dashboard.shortcut.index');
     }
 
     /**
@@ -60,6 +79,8 @@ class ShortcutController extends Controller
      */
     public function destroy(Shortcut $shortcut)
     {
-        //
+        $shortcut->delete();
+
+        return redirect()->route('dashboard.shortcut.index');
     }
 }

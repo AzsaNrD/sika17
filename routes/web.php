@@ -5,7 +5,9 @@ use App\Http\Controllers\AssignmentController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ScheduleController;
+use App\Http\Controllers\ShortcutController;
 use App\Models\Announcements;
+use App\Models\Shortcut;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -20,21 +22,31 @@ Route::middleware(['auth', 'role:Admin', 'verified'])->prefix('dashboard')->name
     })->name('index');
 
     // Route: Pengelolaan Pengumuman
-    Route::get('/pengumuman', [AnnouncementsController::class, 'adminIndex'])->name('announcement.index');
-    Route::get('/pengumuman/create', [AnnouncementsController::class, 'create'])->name('announcement.create');
-    Route::post('/pengumuman', [AnnouncementsController::class, 'store'])->name('announcement.store');
-    Route::get('/pengumuman/{announcement:slug}/edit', [AnnouncementsController::class, 'edit'])->name('announcement.edit');
-    Route::put('/pengumuman/{announcement:slug}', [AnnouncementsController::class, 'update'])->name('announcement.update');
-    Route::delete('/pengumuman/{announcement:slug}', [AnnouncementsController::class, 'destroy'])->name('announcement.destroy');
+    Route::prefix('pengumuman')->name('announcement.')->group(function () {
+        Route::get('/', [AnnouncementsController::class, 'adminIndex'])->name('index');
+        Route::get('/create', [AnnouncementsController::class, 'create'])->name('create');
+        Route::post('/', [AnnouncementsController::class, 'store'])->name('store');
+        Route::get('/{announcement:slug}/edit', [AnnouncementsController::class, 'edit'])->name('edit');
+        Route::put('/{announcement:slug}', [AnnouncementsController::class, 'update'])->name('update');
+        Route::delete('/{announcement:slug}', [AnnouncementsController::class, 'destroy'])->name('destroy');
+    });
+
+    // Route: Pengelolaan Menu Pintasan
+    Route::prefix('menu-pintasan')->name('shortcut.')->group(function () {
+        Route::get('/', [ShortcutController::class, 'index'])->name('index');
+        Route::get('/create', [ShortcutController::class, 'create'])->name('create');
+        Route::post('/', [ShortcutController::class, 'store'])->name('store');
+        Route::get('/{shortcut:id}/edit', [ShortcutController::class, 'edit'])->name('edit');
+        Route::put('/{shortcut:id}', [ShortcutController::class, 'update'])->name('update');
+        Route::delete('/{shortcut:id}', [ShortcutController::class, 'destroy'])->name('destroy');
+    });
 });
 
 // Route: Halaman Utama
 Route::get('/', function () {
-    $announcements = Announcements::with('user')->orderByDesc('created_at')->paginate(3);
-    // $announcements['links']
-
     return Inertia::render('Home', [
-        'announcements' => $announcements,
+        'announcements' => Announcements::with('user')->orderByDesc('created_at')->paginate(3),
+        'shortcuts' => Shortcut::orderBy('title')->get(),
     ]);
 })->name("home");
 

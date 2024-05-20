@@ -45,7 +45,7 @@ export default function Navbar() {
     return (
         <nav className="bg-lilac-grey shadow-nav">
             <div className="max-w-5xl py-3 mx-auto">
-                <div className="flex h-16 px-4">
+                <div className="flex h-16 px-4 lg:px-0">
                     <div className="flex items-center justify-between w-full">
                         <div>
                             <Link
@@ -139,14 +139,14 @@ export default function Navbar() {
                                 </Link>
                             )}
                         </div>
-                        <div className="flex items-center -me-2 sm:hidden">
+                        <div className="flex items-center -me-2 md:hidden">
                             <button
                                 onClick={() =>
                                     setShowingNavigationDropdown(
                                         (previousState) => !previousState
                                     )
                                 }
-                                className="inline-flex items-center justify-center p-2 text-gray-400 transition duration-150 ease-in-out rounded-md hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500"
+                                className="inline-flex items-center justify-center p-2 text-gray-400 transition duration-150 ease-in-out rounded-md hover:text-slate-grey hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-slate-grey"
                             >
                                 <svg
                                     className="w-6 h-6"
