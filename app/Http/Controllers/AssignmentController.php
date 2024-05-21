@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Assignment;
+use App\Models\Course;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -13,7 +14,14 @@ class AssignmentController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Assignment');
+        return Inertia::render('Assignment/Index');
+    }
+
+    public function adminIndex()
+    {
+        return Inertia::render('Assignment/Dashboard/Index', [
+            'assignments' => Assignment::with('course')->paginate(10),
+        ]);
     }
 
     /**
@@ -21,7 +29,9 @@ class AssignmentController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Assignment/Dashboard/Create', [
+            'courses' => Course::orderBy('name')->get(),
+        ]);
     }
 
     /**
@@ -29,7 +39,16 @@ class AssignmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'description' => 'required|string|max:255|min:5',
+            'submission_link' => 'nullable|url:http,https',
+            'course_id' => 'required|exists:courses,id',
+            'due_date' => 'required|date',
+        ]);
+
+        Assignment::create($validated);
+
+        return redirect()->route('dashboard.assignment.index');
     }
 
     /**
@@ -45,7 +64,10 @@ class AssignmentController extends Controller
      */
     public function edit(Assignment $assignment)
     {
-        //
+        return Inertia::render('Assignment/Dashboard/Edit', [
+            'assignment' => $assignment->load('course'),
+            'courses' => Course::orderBy('name')->get(),
+        ]);
     }
 
     /**
@@ -53,7 +75,16 @@ class AssignmentController extends Controller
      */
     public function update(Request $request, Assignment $assignment)
     {
-        //
+        $validated = $request->validate([
+            'description' => 'required|string|max:255|min:5',
+            'submission_link' => 'nullable|url:http,https',
+            'course_id' => 'required|exists:courses,id',
+            'due_date' => 'required|date',
+        ]);
+
+        $assignment->update($validated);
+
+        return redirect()->route('dashboard.assignment.index');
     }
 
     /**
@@ -61,6 +92,8 @@ class AssignmentController extends Controller
      */
     public function destroy(Assignment $assignment)
     {
-        //
+        $assignment->delete();
+
+        return redirect()->route('dashboard.assignment.index');
     }
 }

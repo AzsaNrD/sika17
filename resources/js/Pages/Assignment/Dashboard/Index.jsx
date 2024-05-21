@@ -5,9 +5,9 @@ import { RxPencil2, RxTrash } from "react-icons/rx";
 import { FaPlus } from "react-icons/fa";
 import PaginationLinks from "@/Components/Molecules/PaginationLinks";
 import { dateTime } from "@/Helpers/dateTime";
-import ConfirmDeleteModal from "../Announcement/Dashboard/Partials/ConfirmDeleteModal";
+import ConfirmDeleteModal from "@/Pages/Announcement/Dashboard/Partials/ConfirmDeleteModal";
 
-export default function Index({ auth, shortcuts }) {
+export default function Index({ auth, assignments }) {
     const [confirmingUserDeletion, setConfirmingUserDeletion] = useState(false);
     const [titleDelete, setTitleDelete] = useState("");
 
@@ -36,7 +36,7 @@ export default function Index({ auth, shortcuts }) {
     const deleteUser = (e) => {
         e.preventDefault();
 
-        destroy(route("dashboard.shortcut.destroy", data.id), {
+        destroy(route("dashboard.assignment.destroy", data.id), {
             onSuccess: () => closeModal(),
         });
     };
@@ -46,7 +46,7 @@ export default function Index({ auth, shortcuts }) {
             user={auth.user}
             header={
                 <h2 className="text-xl font-semibold leading-tight text-gunmetal font-anonymous">
-                    Menu Pintasan
+                    Tugas
                 </h2>
             }
             title="Pengumuman"
@@ -55,18 +55,18 @@ export default function Index({ auth, shortcuts }) {
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <div className="flex items-center justify-end px-2 mb-4 sm:px-0">
                         <Link
-                            href={route("dashboard.shortcut.create")}
-                            className="flex items-center tracking-wide gap-2 shadow-md hover:shadow-lg text-sm text-lilac-grey border-blue-violet bg-blue-violet hover:bg-blue-violet/90 transition-all duration-200 rounded-[5px] py-2 px-4"
+                            href={route("dashboard.assignment.create")}
+                            className="flex items-center tracking-wide font-semibold gap-2 shadow-md hover:shadow-lg text-xs text-lilac-grey border-blue-violet bg-blue-violet hover:bg-blue-violet/90 transition-all duration-200 rounded-[5px] py-2 px-4"
                         >
                             <FaPlus />
-                            Tambah Menu Pintasan
+                            TAMBAH TUGAS
                         </Link>
                     </div>
                     <div className="overflow-hidden shadow-universal bg-lilac-white sm:rounded-[5px]">
                         <div className="p-6 text-slate-grey">
-                            {shortcuts.data.length === 0 ? (
+                            {assignments.data.length === 0 ? (
                                 <div className="relative flex overflow-x-hidden font-medium select-none">
-                                    <span>Belum ada menu pintasan.</span>
+                                    <span>Belum ada tugas.</span>
                                 </div>
                             ) : (
                                 <div className="overflow-x-auto">
@@ -74,10 +74,13 @@ export default function Index({ auth, shortcuts }) {
                                         <thead>
                                             <tr className="border-b border-[#BABABA]">
                                                 <th className="px-3 py-3 text-sm font-bold tracking-wide text-left text-gunmetal">
-                                                    TITLE
+                                                    MATA KULIAH
                                                 </th>
                                                 <th className="px-3 py-3 text-sm font-bold tracking-wide text-left text-gunmetal">
-                                                    URL
+                                                    PENGUMPULAN TUGAS
+                                                </th>
+                                                <th className="px-3 py-3 text-sm font-bold tracking-wide text-left text-gunmetal">
+                                                    DEADLINE
                                                 </th>
                                                 <th className="px-3 py-3 text-sm font-bold tracking-wide text-left text-gunmetal">
                                                     TANGGAL DITAMBAH
@@ -88,17 +91,32 @@ export default function Index({ auth, shortcuts }) {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {shortcuts.data.map(
+                                            {assignments.data.map(
                                                 (item, index) => (
                                                     <tr
                                                         className="border-b border-[#DEDEDE] hover:bg-zinc-100 transition-all duration-150"
                                                         key={index}
                                                     >
                                                         <td className="px-3 py-5 text-sm text-slate-grey">
-                                                            {item.title}
+                                                            {item.course.name}
                                                         </td>
                                                         <td className="px-3 py-5 text-sm text-slate-grey">
-                                                            {item.url}
+                                                            {item.submission_link ||
+                                                                "-"}
+                                                        </td>
+                                                        <td className="px-3 py-5 text-sm text-slate-grey">
+                                                            {
+                                                                dateTime(
+                                                                    item.due_date
+                                                                ).date
+                                                            }{" "}
+                                                            {" - "}{" "}
+                                                            {
+                                                                dateTime(
+                                                                    item.due_date
+                                                                ).time
+                                                            }{" "}
+                                                            {" WIB"}
                                                         </td>
                                                         <td className="px-3 py-5 text-sm text-slate-grey">
                                                             {
@@ -106,7 +124,7 @@ export default function Index({ auth, shortcuts }) {
                                                                     item.created_at
                                                                 ).date
                                                             }{" "}
-                                                            {" - "}{" "}
+                                                            {" | "}{" "}
                                                             {
                                                                 dateTime(
                                                                     item.created_at
@@ -117,7 +135,7 @@ export default function Index({ auth, shortcuts }) {
                                                         <td className="flex items-center justify-center h-full py-5 text-lg gap-7 text-slate-grey">
                                                             <Link
                                                                 href={route(
-                                                                    "dashboard.shortcut.edit",
+                                                                    "dashboard.assignment.edit",
                                                                     item.id
                                                                 )}
                                                             >
@@ -126,7 +144,9 @@ export default function Index({ auth, shortcuts }) {
                                                             <button
                                                                 onClick={() =>
                                                                     confirmUserDeletion(
-                                                                        item.title,
+                                                                        item
+                                                                            .course
+                                                                            .name,
                                                                         item.id
                                                                     )
                                                                 }
@@ -142,12 +162,12 @@ export default function Index({ auth, shortcuts }) {
                                 </div>
                             )}
                         </div>
-                        {shortcuts.data.length > 0 && (
+                        {assignments.total > 0 && (
                             <div className="flex justify-center pb-6">
                                 <PaginationLinks
-                                    links={shortcuts.links}
-                                    currentPage={shortcuts.current_page}
-                                    lastPage={shortcuts.last_page}
+                                    links={assignments.links}
+                                    currentPage={assignments.current_page}
+                                    lastPage={assignments.last_page}
                                 />
                             </div>
                         )}

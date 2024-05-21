@@ -6,7 +6,7 @@ export default function PaginationLinks({ links, currentPage, lastPage }) {
     if (!links || links.length <= 3) return null;
 
     return (
-        <div className="flex space-x-2">
+        <div className="flex px-2 space-x-2 overflow-x-auto">
             {links.map((item, index) => {
                 if (item.label === "&laquo; Previous" && currentPage === 1) {
                     return null;

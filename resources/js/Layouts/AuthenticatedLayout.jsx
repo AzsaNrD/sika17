@@ -22,6 +22,21 @@ const urls = [
         routeName: "dashboard.shortcut.index",
         component: "Shortcut",
     },
+    {
+        title: "Tugas",
+        routeName: "dashboard.assignment.index",
+        component: "Assignment",
+    },
+    {
+        title: "Dosen",
+        routeName: "dashboard.lecturer.index",
+        component: "Lecturer",
+    },
+    {
+        title: "Mata Kuliah",
+        routeName: "dashboard.course.index",
+        component: "Course",
+    },
 ];
 
 export default function Authenticated({ user, header, title, children }) {

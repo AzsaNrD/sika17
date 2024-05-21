@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Lecturer;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class LecturerController extends Controller
 {
@@ -12,7 +13,9 @@ class LecturerController extends Controller
      */
     public function index()
     {
-        //
+        return Inertia::render('Lecturer/Index', [
+            'lecturers' => Lecturer::orderBy('name')->paginate(10),
+        ]);
     }
 
     /**
@@ -20,7 +23,7 @@ class LecturerController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Lecturer/Create');
     }
 
     /**
@@ -28,7 +31,14 @@ class LecturerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'staffsite' => 'nullable|max:255|url:http,https'
+        ]);
+
+        Lecturer::create($validated);
+
+        return redirect()->route('dashboard.lecturer.index');
     }
 
     /**
@@ -44,7 +54,9 @@ class LecturerController extends Controller
      */
     public function edit(Lecturer $lecturer)
     {
-        //
+        return Inertia::render('Lecturer/Edit', [
+            'lecturer' => $lecturer
+        ]);
     }
 
     /**
@@ -52,7 +64,14 @@ class LecturerController extends Controller
      */
     public function update(Request $request, Lecturer $lecturer)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'staffsite' => 'nullable|max:255|url:http,https'
+        ]);
+
+        $lecturer->update($validated);
+
+        return redirect()->route('dashboard.lecturer.index');
     }
 
     /**
@@ -60,6 +79,8 @@ class LecturerController extends Controller
      */
     public function destroy(Lecturer $lecturer)
     {
-        //
+        $lecturer->delete();
+
+        return redirect()->route('dashboard.lecturer.index');
     }
 }

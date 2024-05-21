@@ -36,21 +36,21 @@ export default function AnnouncementTable({ announcements, onDelete }) {
                                 {item.user.name}
                             </td>
                             <td className="px-3 py-5 text-sm text-slate-grey">
-                                {dateTime(item.created_at).date} {" | "}{" "}
+                                {dateTime(item.created_at).date} {" - "}{" "}
                                 {dateTime(item.created_at).time} {" WIB"}
                             </td>
                             <td className="flex items-center justify-center h-full py-5 text-lg gap-7 text-slate-grey">
                                 <Link
                                     href={route(
                                         "dashboard.announcement.edit",
-                                        item.slug
+                                        item.id
                                     )}
                                 >
                                     <RxPencil2 />
                                 </Link>
                                 <button
                                     onClick={() =>
-                                        onDelete(item.title, item.slug)
+                                        onDelete(item.title, item.id)
                                     }
                                 >
                                     <RxTrash />

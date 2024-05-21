@@ -12,13 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('schedules', function (Blueprint $table) {
-            $table->id();
+            $table->ulid('id')->primary();
             $table->string('day');
             $table->tinyInteger('day_numeric');
             $table->time('start_time');
             $table->time('end_time');
-            $table->foreignId('course_id')->constrained()->onDelete('cascade');
-            $table->foreignId('lecturer_id')->constrained()->onDelete('cascade');
+            $table->foreignUlid('course_id')->constrained()->onDelete('cascade');
+            $table->foreignUlid('lecturer_id')->constrained()->onDelete('cascade');
             $table->softDeletes();
             $table->timestamps();
         });

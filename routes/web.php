@@ -3,6 +3,7 @@
 use App\Http\Controllers\AnnouncementsController;
 use App\Http\Controllers\AssignmentController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\LecturerController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\ShortcutController;
@@ -26,9 +27,9 @@ Route::middleware(['auth', 'role:Admin', 'verified'])->prefix('dashboard')->name
         Route::get('/', [AnnouncementsController::class, 'adminIndex'])->name('index');
         Route::get('/create', [AnnouncementsController::class, 'create'])->name('create');
         Route::post('/', [AnnouncementsController::class, 'store'])->name('store');
-        Route::get('/{announcement:slug}/edit', [AnnouncementsController::class, 'edit'])->name('edit');
-        Route::put('/{announcement:slug}', [AnnouncementsController::class, 'update'])->name('update');
-        Route::delete('/{announcement:slug}', [AnnouncementsController::class, 'destroy'])->name('destroy');
+        Route::get('/{announcement}/edit', [AnnouncementsController::class, 'edit'])->name('edit');
+        Route::put('/{announcement}', [AnnouncementsController::class, 'update'])->name('update');
+        Route::delete('/{announcement}', [AnnouncementsController::class, 'destroy'])->name('destroy');
     });
 
     // Route: Pengelolaan Menu Pintasan
@@ -39,6 +40,36 @@ Route::middleware(['auth', 'role:Admin', 'verified'])->prefix('dashboard')->name
         Route::get('/{shortcut:id}/edit', [ShortcutController::class, 'edit'])->name('edit');
         Route::put('/{shortcut:id}', [ShortcutController::class, 'update'])->name('update');
         Route::delete('/{shortcut:id}', [ShortcutController::class, 'destroy'])->name('destroy');
+    });
+
+    // Route: Pengelolaan Tugas
+    Route::prefix('tugas')->name('assignment.')->group(function () {
+        Route::get('/', [AssignmentController::class, 'adminIndex'])->name('index');
+        Route::get('/create', [AssignmentController::class, 'create'])->name('create');
+        Route::post('/', [AssignmentController::class, 'store'])->name('store');
+        Route::get('/{assignment}/edit', [AssignmentController::class, 'edit'])->name('edit');
+        Route::put('/{assignment}', [AssignmentController::class, 'update'])->name('update');
+        Route::delete('/{assignment}', [AssignmentController::class, 'destroy'])->name('destroy');
+    });
+
+    // Route: Pengelolaan Dosen
+    Route::prefix('dosen')->name('lecturer.')->group(function () {
+        Route::get('/', [LecturerController::class, 'index'])->name('index');
+        Route::get('/create', [LecturerController::class, 'create'])->name('create');
+        Route::post('/', [LecturerController::class, 'store'])->name('store');
+        Route::get('/{lecturer}/edit', [LecturerController::class, 'edit'])->name('edit');
+        Route::put('/{lecturer}', [LecturerController::class, 'update'])->name('update');
+        Route::delete('/{lecturer}', [LecturerController::class, 'destroy'])->name('destroy');
+    });
+
+    // Route: Pengelolaan Mata Kuliah
+    Route::prefix('mata-kuliah')->name('course.')->group(function () {
+        Route::get('/', [CourseController::class, 'adminIndex'])->name('index');
+        Route::get('/create', [CourseController::class, 'create'])->name('create');
+        Route::post('/', [CourseController::class, 'store'])->name('store');
+        Route::get('/{course}/edit', [CourseController::class, 'edit'])->name('edit');
+        Route::put('/{course}', [CourseController::class, 'update'])->name('update');
+        Route::delete('/{course}', [CourseController::class, 'destroy'])->name('destroy');
     });
 });
 

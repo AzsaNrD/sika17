@@ -64,8 +64,8 @@ export default function Index({ auth, announcements }) {
                     <div className="overflow-hidden shadow-universal bg-lilac-white sm:rounded-[5px]">
                         <div className="p-6 text-slate-grey">
                             {announcements.total === 0 ? (
-                                <div className="relative flex overflow-x-hidden select-none">
-                                    <span>🚧Belum ada pengumuman🚧</span>
+                                <div className="relative flex overflow-x-hidden font-medium select-none">
+                                    <span>Belum ada pengumuman.</span>
                                 </div>
                             ) : (
                                 <AnnouncementTable
@@ -74,13 +74,15 @@ export default function Index({ auth, announcements }) {
                                 />
                             )}
                         </div>
-                        <div className="flex justify-center pb-6">
-                        <PaginationLinks
-                            links={announcements.links}
-                            currentPage={announcements.current_page}
-                            lastPage={announcements.last_page}
-                        />
-                        </div>
+                        {announcements.total > 0 && (
+                            <div className="flex justify-center pb-6">
+                                <PaginationLinks
+                                    links={announcements.links}
+                                    currentPage={announcements.current_page}
+                                    lastPage={announcements.last_page}
+                                />
+                            </div>
+                        )}
                     </div>
                     <ConfirmDeleteModal
                         show={confirmingUserDeletion}

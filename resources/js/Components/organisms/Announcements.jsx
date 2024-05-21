@@ -3,7 +3,6 @@ import PaginationLinks from "../Molecules/PaginationLinks";
 import AnnouncementList from "./AnnouncementList";
 
 export default function Announcements({ announcements }) {
-    console.log(announcements);
     return (
         <div>
             <h2 className="text-xl font-bold text-gunmetal">PENGUMUMAN</h2>
