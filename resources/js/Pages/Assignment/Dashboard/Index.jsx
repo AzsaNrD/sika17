@@ -70,10 +70,10 @@ export default function Index({ auth, assignments }) {
                                 </div>
                             ) : (
                                 <div className="overflow-x-auto">
-                                    <table className="min-w-full">
+                                    <table>
                                         <thead>
                                             <tr className="border-b border-[#BABABA]">
-                                                <th className="px-3 py-3 text-sm font-bold tracking-wide text-left text-gunmetal">
+                                                <th className="py-3 text-sm font-bold tracking-wide text-left wpx-3 text-gunmetal">
                                                     MATA KULIAH
                                                 </th>
                                                 <th className="px-3 py-3 text-sm font-bold tracking-wide text-left text-gunmetal">
@@ -105,18 +105,25 @@ export default function Index({ auth, assignments }) {
                                                                 "-"}
                                                         </td>
                                                         <td className="px-3 py-5 text-sm text-slate-grey">
-                                                            {
-                                                                dateTime(
-                                                                    item.due_date
-                                                                ).date
-                                                            }{" "}
-                                                            {" - "}{" "}
-                                                            {
-                                                                dateTime(
-                                                                    item.due_date
-                                                                ).time
-                                                            }{" "}
-                                                            {" WIB"}
+                                                            {item.due_date !==
+                                                            null ? (
+                                                                <>
+                                                                    {
+                                                                        dateTime(
+                                                                            item.due_date
+                                                                        ).date
+                                                                    }{" "}
+                                                                    {" - "}{" "}
+                                                                    {
+                                                                        dateTime(
+                                                                            item.due_date
+                                                                        ).time
+                                                                    }{" "}
+                                                                    {" WIB"}
+                                                                </>
+                                                            ) : (
+                                                                "-"
+                                                            )}
                                                         </td>
                                                         <td className="px-3 py-5 text-sm text-slate-grey">
                                                             {

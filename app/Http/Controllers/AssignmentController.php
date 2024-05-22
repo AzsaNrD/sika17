@@ -14,7 +14,16 @@ class AssignmentController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Assignment/Index');
+        return Inertia::render('Assignment/Index', [
+            'assignments' => Assignment::with('course')
+                ->orderByRaw("
+                CASE
+                    WHEN due_date > NOW() THEN 0
+                    WHEN due_date IS NULL THEN 1
+                    ELSE 2
+                END, due_date")
+                ->paginate(4)
+        ]);
     }
 
     public function adminIndex()
@@ -40,10 +49,10 @@ class AssignmentController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'description' => 'required|string|max:255|min:5',
+            'description' => 'required|string|min:5',
             'submission_link' => 'nullable|url:http,https',
             'course_id' => 'required|exists:courses,id',
-            'due_date' => 'required|date',
+            'due_date' => 'nullable|date',
         ]);
 
         Assignment::create($validated);
@@ -76,10 +85,10 @@ class AssignmentController extends Controller
     public function update(Request $request, Assignment $assignment)
     {
         $validated = $request->validate([
-            'description' => 'required|string|max:255|min:5',
+            'description' => 'required|string|min:5',
             'submission_link' => 'nullable|url:http,https',
             'course_id' => 'required|exists:courses,id',
-            'due_date' => 'required|date',
+            'due_date' => 'nullable|date',
         ]);
 
         $assignment->update($validated);

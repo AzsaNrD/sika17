@@ -131,10 +131,9 @@ export default function Create({ auth, courses }) {
                                         onChange={(e) =>
                                             setData("due_date", e.target.value)
                                         }
-                                        required
                                     />
                                     <InputError
-                                        message={errors.deadline}
+                                        message={errors.due_date}
                                         className="mt-2"
                                     />
                                 </div>
