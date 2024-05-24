@@ -3,19 +3,21 @@ import Authenticated from "@/Layouts/AuthenticatedLayout";
 import InputLabel from "@/Components/InputLabel";
 import TextInput from "@/Components/TextInput";
 import PrimaryButton from "@/Components/PrimaryButton";
-import { Link, useForm } from "@inertiajs/react";
+import { useForm } from "@inertiajs/react";
 import InputError from "@/Components/InputError";
 import BackButton from "@/Components/Atoms/BackButton";
 
-export default function Create({ auth, course, lecturers }) {
+export default function Edit({ auth, course, lecturers, semesters }) {
+    console.log(course);
     const { setData, data, put, errors, processing } = useForm({
         name: course.name,
         code: course.code || "",
         sks: course.sks,
-        semester: course.semester,
+        semester_id: course.semester?.id || "",
         type: course.type,
         material_url: course.material_url || "",
-        rps_url: course.rps_url || "",
+        vclass: course.vclass || "",
+        rps: course.rps || "",
         lecturer_id: course.lecturer_id,
     });
 
@@ -95,20 +97,39 @@ export default function Create({ auth, course, lecturers }) {
                                 </div>
                                 <div>
                                     <InputLabel
-                                        htmlFor="semester"
+                                        htmlFor="semester_id"
                                         value="Semester"
                                     />
-                                    <TextInput
-                                        id="semester"
-                                        value={data.semester}
-                                        className="block w-full mt-1 border border-[#ccced1] rounded-sm"
+                                    <select
+                                        id="semester_id"
+                                        className="block w-full mt-1 text-base bg-transparent border border-gray-400 shadow-sm text-gunmetal focus:border-blue-violet focus:ring-blue-violet"
                                         onChange={(e) =>
-                                            setData("semester", e.target.value)
+                                            setData(
+                                                "semester_id",
+                                                e.target.value
+                                            )
                                         }
-                                        required
-                                    />
+                                        value={data.semester_id}
+                                    >
+                                        {semesters.length !== 0 ? (
+                                            <option value="">Pilih</option>
+                                        ) : (
+                                            <option value="">
+                                                DATA SEMESTER MASIH KOSONG
+                                            </option>
+                                        )}
+                                        {semesters &&
+                                            semesters.map((semester) => (
+                                                <option
+                                                    key={semester.id}
+                                                    value={semester.id}
+                                                >
+                                                    {semester.name}
+                                                </option>
+                                            ))}
+                                    </select>
                                     <InputError
-                                        message={errors.semester}
+                                        message={errors.lecturer_id}
                                         className="mt-2"
                                     />
                                 </div>
@@ -156,19 +177,37 @@ export default function Create({ auth, course, lecturers }) {
                                 </div>
                                 <div>
                                     <InputLabel
-                                        htmlFor="rps_url"
+                                        htmlFor="rps"
                                         value="Link RPS (Optional)"
                                     />
                                     <TextInput
-                                        id="rps_url"
-                                        value={data.rps_url}
+                                        id="rps"
+                                        value={data.rps}
                                         className="block w-full mt-1 border border-[#ccced1] rounded-sm"
                                         onChange={(e) =>
-                                            setData("rps_url", e.target.value)
+                                            setData("rps", e.target.value)
                                         }
                                     />
                                     <InputError
-                                        message={errors.rps_url}
+                                        message={errors.rps}
+                                        className="mt-2"
+                                    />
+                                </div>
+                                <div>
+                                    <InputLabel
+                                        htmlFor="vclass"
+                                        value="Link VClass (Optional)"
+                                    />
+                                    <TextInput
+                                        id="vclass"
+                                        value={data.vclass}
+                                        className="block w-full mt-1 border border-[#ccced1] rounded-sm"
+                                        onChange={(e) =>
+                                            setData("vclass", e.target.value)
+                                        }
+                                    />
+                                    <InputError
+                                        message={errors.vclass}
                                         className="mt-2"
                                     />
                                 </div>

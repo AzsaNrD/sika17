@@ -7,14 +7,15 @@ import { Link, useForm } from "@inertiajs/react";
 import InputError from "@/Components/InputError";
 import BackButton from "@/Components/Atoms/BackButton";
 
-export default function Create({ auth, lecturers }) {
+export default function Create({ auth, lecturers, semesters }) {
     const { setData, post, errors, processing } = useForm({
         name: "",
         code: "",
         sks: "",
-        semester: "",
+        semester_id: "",
         type: "wajib",
         material_url: "",
+        vclass: "",
         rps_url: "",
         lecturer_id: "",
     });
@@ -43,7 +44,7 @@ export default function Create({ auth, lecturers }) {
                         <div>
                             <form onSubmit={submit} className="mt-6 space-y-6">
                                 <div>
-                                    <InputLabel htmlFor="nama" value="Nama" />
+                                    <InputLabel htmlFor="nama" value="Nama Matkul" />
                                     <TextInput
                                         id="nama"
                                         className="block w-full mt-1 border border-[#ccced1] rounded-sm"
@@ -92,19 +93,41 @@ export default function Create({ auth, lecturers }) {
                                 </div>
                                 <div>
                                     <InputLabel
-                                        htmlFor="semester"
+                                        htmlFor="semester_id"
                                         value="Semester"
                                     />
-                                    <TextInput
-                                        id="semester"
-                                        className="block w-full mt-1 border border-[#ccced1] rounded-sm"
+                                    <select
+                                        id="semester_id"
+                                        className="block w-full mt-1 text-base bg-transparent border border-gray-400 shadow-sm text-gunmetal focus:border-blue-violet focus:ring-blue-violet"
                                         onChange={(e) =>
-                                            setData("semester", e.target.value)
+                                            setData(
+                                                "semester_id",
+                                                e.target.value
+                                            )
                                         }
-                                        required
-                                    />
+                                    >
+                                        {semesters.length !== 0 ? (
+                                            <>
+                                                <option value="">
+                                                    Pilih Semester
+                                                </option>
+                                                {semesters.map((semester) => (
+                                                    <option
+                                                        key={semester.id}
+                                                        value={semester.id}
+                                                    >
+                                                        {semester.name}
+                                                    </option>
+                                                ))}
+                                            </>
+                                        ) : (
+                                            <option value="">
+                                                DATA SEMESTER MASIH KOSONG (TAMBAHKAN TERLEBIH DAHULU)
+                                            </option>
+                                        )}
+                                    </select>
                                     <InputError
-                                        message={errors.semester}
+                                        message={errors.semester_id}
                                         className="mt-2"
                                     />
                                 </div>
@@ -162,6 +185,23 @@ export default function Create({ auth, lecturers }) {
                                     />
                                     <InputError
                                         message={errors.rps_url}
+                                        className="mt-2"
+                                    />
+                                </div>
+                                <div>
+                                    <InputLabel
+                                        htmlFor="vclass"
+                                        value="Link VClass (Optional)"
+                                    />
+                                    <TextInput
+                                        id="vclass"
+                                        className="block w-full mt-1 border border-[#ccced1] rounded-sm"
+                                        onChange={(e) =>
+                                            setData("vclass", e.target.value)
+                                        }
+                                    />
+                                    <InputError
+                                        message={errors.vclass}
                                         className="mt-2"
                                     />
                                 </div>

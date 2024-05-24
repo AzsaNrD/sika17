@@ -37,6 +37,11 @@ const urls = [
         routeName: "dashboard.course.index",
         component: "Course",
     },
+    {
+        title: "Semester",
+        routeName: "dashboard.semester.index",
+        component: "Semester",
+    }
 ];
 
 export default function Authenticated({ user, header, title, children }) {

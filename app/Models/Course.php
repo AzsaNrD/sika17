@@ -20,6 +20,10 @@ class Course extends Model
         return $this->belongsTo(Lecturer::class);
     }
 
+    public function semester(): BelongsTo {
+        return $this->belongsTo(Semester::class);
+    }
+
     public function assignment(): HasMany {
         return $this->hasMany(Assignment::class);
     }

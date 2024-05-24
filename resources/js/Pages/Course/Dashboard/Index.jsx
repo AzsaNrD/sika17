@@ -8,6 +8,7 @@ import { dateTime } from "@/Helpers/dateTime";
 import ConfirmDeleteModal from "@/Pages/Announcement/Dashboard/Partials/ConfirmDeleteModal";
 
 export default function Index({ auth, courses }) {
+    console.log(courses);
     const [confirmingUserDeletion, setConfirmingUserDeletion] = useState(false);
     const [titleDelete, setTitleDelete] = useState("");
 
@@ -77,6 +78,9 @@ export default function Index({ auth, courses }) {
                                                     NAMA
                                                 </th>
                                                 <th className="px-3 py-3 text-sm font-bold tracking-wide text-left text-gunmetal">
+                                                    DOSEN
+                                                </th>
+                                                <th className="px-3 py-3 text-sm font-bold tracking-wide text-left text-gunmetal">
                                                     SEMESTER
                                                 </th>
                                                 <th className="px-3 py-3 text-sm font-bold tracking-wide text-left text-gunmetal">
@@ -97,7 +101,14 @@ export default function Index({ auth, courses }) {
                                                         {item.name}
                                                     </td>
                                                     <td className="px-3 py-5 text-sm text-slate-grey">
-                                                        {item.semester}
+                                                        {item.lecturer
+                                                            ? item.lecturer.name
+                                                            : "-"}
+                                                    </td>
+                                                    <td className="px-3 py-5 text-sm text-slate-grey">
+                                                        {item.semester
+                                                            ? item.semester.name
+                                                            : "-"}
                                                     </td>
                                                     <td className="px-3 py-5 text-sm text-slate-grey">
                                                         {

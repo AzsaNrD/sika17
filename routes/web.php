@@ -6,10 +6,10 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\LecturerController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ScheduleController;
+use App\Http\Controllers\SemesterController;
 use App\Http\Controllers\ShortcutController;
 use App\Models\Announcements;
 use App\Models\Shortcut;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -71,6 +71,16 @@ Route::middleware(['auth', 'role:Admin', 'verified'])->prefix('dashboard')->name
         Route::put('/{course}', [CourseController::class, 'update'])->name('update');
         Route::delete('/{course}', [CourseController::class, 'destroy'])->name('destroy');
     });
+
+    // Route: Pengelolaan Semester
+    Route::prefix('semester')->name('semester.')->group(function () {
+        Route::get('/', [SemesterController::class, 'index'])->name('index');
+        Route::get('/create', [SemesterController::class, 'create'])->name('create');
+        Route::post('/', [SemesterController::class, 'store'])->name('store');
+        Route::get('/{semester}/edit', [SemesterController::class, 'edit'])->name('edit');
+        Route::put('/{semester}', [SemesterController::class, 'update'])->name('update');
+        Route::delete('/{semester}', [SemesterController::class, 'destroy'])->name('destroy');
+    });
 });
 
 // Route: Halaman Utama
@@ -90,7 +100,7 @@ Route::get('/jadwal-kuliah', [ScheduleController::class, 'index'])->name('schedu
 // Route: Mata Kuliah
 Route::prefix('mata-kuliah')->name('course.')->group(function () {
     Route::get('/', [CourseController::class, 'index'])->name('index');
-    Route::get('/{course:semester}', [CourseController::class, 'show'])->name('show');
+    Route::get('/semester/{semester:name}', [CourseController::class, 'showBySemester'])->name('show');
 });
 
 // Route: Profile

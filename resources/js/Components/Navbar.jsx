@@ -185,7 +185,7 @@ export default function Navbar() {
                 <div
                     className={
                         (showingNavigationDropdown ? "block" : "hidden") +
-                        " sm:hidden"
+                        " md:hidden"
                     }
                 >
                     <div className="pt-2 pb-3 space-y-1">
