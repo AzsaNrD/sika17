@@ -81,6 +81,16 @@ Route::middleware(['auth', 'role:Admin', 'verified'])->prefix('dashboard')->name
         Route::put('/{semester}', [SemesterController::class, 'update'])->name('update');
         Route::delete('/{semester}', [SemesterController::class, 'destroy'])->name('destroy');
     });
+
+    // Route: Pengelolaan Jadwal
+    Route::prefix('jadwal-kuliah')->name('schedule.')->group(function () {
+        Route::get('/', [ScheduleController::class, 'adminIndex'])->name('index');
+        Route::get('/create', [ScheduleController::class, 'create'])->name('create');
+        Route::post('/', [ScheduleController::class, 'store'])->name('store');
+        Route::get('/{schedule}/edit', [ScheduleController::class, 'edit'])->name('edit');
+        Route::put('/{schedule}', [ScheduleController::class, 'update'])->name('update');
+        Route::delete('/{schedule}', [ScheduleController::class, 'destroy'])->name('destroy');
+    });
 });
 
 // Route: Halaman Utama

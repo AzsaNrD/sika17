@@ -41,6 +41,11 @@ const urls = [
         title: "Semester",
         routeName: "dashboard.semester.index",
         component: "Semester",
+    },
+    {
+        title: "Jadwal Kuliah",
+        routeName: "dashboard.schedule.index",
+        component: "Schedule",
     }
 ];
 
@@ -67,8 +72,8 @@ export default function Authenticated({ user, header, title, children }) {
             </Head>
             <div className="min-h-screen ">
                 <nav className="border-b border-gray-200 bg-lilac-grey">
-                    <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-                        <div className="flex justify-between h-16">
+                    <div className="px-4 mx-auto lg:py-0 max-w-7xl sm:px-6 lg:px-8">
+                        <div className="flex justify-between h-16 lg:h-fit">
                             <div className="flex">
                                 <div className="flex items-center shrink-0">
                                     <Link
@@ -81,7 +86,7 @@ export default function Authenticated({ user, header, title, children }) {
 
                                 {(user.role === "Admin" ||
                                     user.role === "Super Admin") && (
-                                    <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                                    <div className="hidden space-x-8 lg:-my-px lg:ms-10 lg:flex lg:flex-wrap lg:py-5 lg:gap-2">
                                         {urls.map((item, index) => (
                                             <NavLink
                                                 key={index}
@@ -102,11 +107,11 @@ export default function Authenticated({ user, header, title, children }) {
                                 )}
                             </div>
 
-                            <div className="hidden sm:flex sm:items-center sm:ms-6">
+                            <div className="hidden lg:flex lg:items-center lg:justify-end lg:ms-0 lg:min-w-fit">
                                 <div className="relative ms-3">
                                     <Dropdown>
                                         <Dropdown.Trigger>
-                                            <span className="inline-flex rounded-md">
+                                            <span className="inline-block w-full rounded-md">
                                                 <button
                                                     type="button"
                                                     className="inline-flex items-center px-3 py-2 font-medium leading-4 transition duration-150 ease-in-out border border-transparent rounded-md text-slate-grey hover:text-gunmetal focus:outline-none"
@@ -163,7 +168,7 @@ export default function Authenticated({ user, header, title, children }) {
                                 </div>
                             </div>
 
-                            <div className="flex items-center -me-2 sm:hidden">
+                            <div className="flex items-center -me-2 lg:hidden">
                                 <button
                                     onClick={() =>
                                         setShowingNavigationDropdown(
@@ -209,7 +214,7 @@ export default function Authenticated({ user, header, title, children }) {
                     <div
                         className={
                             (showingNavigationDropdown ? "block" : "hidden") +
-                            " sm:hidden"
+                            " lg:hidden"
                         }
                     >
                         {(user.role === "Admin" ||

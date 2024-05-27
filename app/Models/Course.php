@@ -24,6 +24,11 @@ class Course extends Model
         return $this->belongsTo(Semester::class);
     }
 
+    public function schedule(): HasMany
+    {
+        return $this->hasMany(Schedule::class);
+    }
+
     public function assignment(): HasMany {
         return $this->hasMany(Assignment::class);
     }
