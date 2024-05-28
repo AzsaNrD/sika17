@@ -8,6 +8,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\SemesterController;
 use App\Http\Controllers\ShortcutController;
+use App\Http\Controllers\UserController;
 use App\Models\Announcements;
 use App\Models\Shortcut;
 use Illuminate\Support\Facades\Route;
@@ -90,6 +91,15 @@ Route::middleware(['auth', 'role:Admin', 'verified'])->prefix('dashboard')->name
         Route::get('/{schedule}/edit', [ScheduleController::class, 'edit'])->name('edit');
         Route::put('/{schedule}', [ScheduleController::class, 'update'])->name('update');
         Route::delete('/{schedule}', [ScheduleController::class, 'destroy'])->name('destroy');
+    });
+
+    // Route: Pengelolaan User
+    Route::middleware('superadmin')->prefix('user')->name('user.')->group(function () {
+        Route::get('/', [UserController::class, 'index'])->name('index');
+        Route::delete('/{user}', [UserController::class, 'destroy'])->name('destroy');
+        Route::get('/{user}/edit', [UserController::class, 'edit'])->name('edit');
+        Route::put('/{user}', [UserController::class, 'update'])->name('update');
+        Route::post('/{user}/reset-password', [UserController::class, 'resetPassword'])->name('reset_password');
     });
 });
 

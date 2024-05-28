@@ -46,7 +46,15 @@ const urls = [
         title: "Jadwal Kuliah",
         routeName: "dashboard.schedule.index",
         component: "Schedule",
-    }
+    },
+];
+
+const urlsSuperAdmin = [
+    {
+        title: "User",
+        routeName: "dashboard.user.index",
+        component: "User",
+    },
 ];
 
 export default function Authenticated({ user, header, title, children }) {
@@ -103,6 +111,27 @@ export default function Authenticated({ user, header, title, children }) {
                                                 {item.title}
                                             </NavLink>
                                         ))}
+                                        {user.role === "Super Admin" &&
+                                            urlsSuperAdmin.map(
+                                                (item, index) => (
+                                                    <NavLink
+                                                        key={index}
+                                                        href={route(
+                                                            item.routeName
+                                                        )}
+                                                        active={
+                                                            route().current(
+                                                                item.routeName
+                                                            ) ||
+                                                            component.startsWith(
+                                                                item.component
+                                                            )
+                                                        }
+                                                    >
+                                                        {item.title}
+                                                    </NavLink>
+                                                )
+                                            )}
                                     </div>
                                 )}
                             </div>
