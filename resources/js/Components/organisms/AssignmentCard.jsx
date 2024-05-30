@@ -17,7 +17,7 @@ export default function AssignmentCard({
         <div className="bg-lilac-grey hover:bg-[#FDFBFF] transition-all gap-5 duration-200 shadow-universal rounded-[5px] flex flex-col md:flex-row justify-between md:items-center md:gap-0 py-7 px-7 md:px-14">
             <div>
                 <div className="flex flex-col gap-2 md:items-center md:flex-row">
-                    <h3 className="order-2 text-lg font-medium md:mt-2 md:order-1 text-gunmetal">
+                    <h3 className="order-2 text-lg font-medium md:order-1 text-gunmetal">
                         {course.name}
                     </h3>
                     {isPassed && (

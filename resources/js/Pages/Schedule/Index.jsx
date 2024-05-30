@@ -3,6 +3,7 @@ import AppLayout from "@/Layouts/AppLayout";
 import React from "react";
 
 export default function Schedule({ schedules, lastUpdate }) {
+    console.log(schedules);
     return (
         <AppLayout title="Jadwal Kuliah">
             <main className="max-w-5xl px-4 mx-auto my-10 sm:my-16 lg:px-0 min-h-svh">
@@ -22,7 +23,7 @@ export default function Schedule({ schedules, lastUpdate }) {
                             </span>
                         </p>
                     ) : (
-                        <p className="mt-4 text-slate-grey">
+                        <p className="mt-4 text-sm text-slate-grey">
                             Jadwal belum tersedia.
                         </p>
                     )}
@@ -52,38 +53,69 @@ export default function Schedule({ schedules, lastUpdate }) {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {schedules.map(
-                                            (item, index) => (
-                                                <tr
-                                                    className="border-b border-[#DEDEDE]"
-                                                    key={index}
-                                                >
-                                                    <td className="px-3 py-5 text-sm capitalize truncate text-slate-grey">
-                                                        {item.day}
-                                                    </td>
-                                                    <td className="px-3 py-5 text-sm truncate text-slate-grey">
-                                                        {item.course.name}
-                                                    </td>
-                                                    <td className="px-3 py-5 text-sm truncate text-slate-grey">
-                                                        {item.start_time.substring(0,5)} - {item.end_time.substring(0,5)}
-                                                    </td>
-                                                    <td className="px-3 py-5 text-sm truncate text-slate-grey">
-                                                        {item.room}
-                                                    </td>
-                                                    <td className="px-3 py-5 text-sm truncate text-slate-grey">
-                                                        {item.course.lecturer ? item.course.lecturer.name : "-"}
-                                                    </td>
-                                                </tr>
-                                            )
-                                        )}
+                                        {schedules.map((item, index) => (
+                                            <tr
+                                                className="border-b border-[#DEDEDE] hover:bg-[#f3eef8] transition-all duration-150"
+                                                key={index}
+                                            >
+                                                <td className="px-3 py-5 text-sm capitalize truncate text-slate-grey">
+                                                    {item.day}
+                                                </td>
+                                                <td className="px-3 py-5 text-sm truncate text-slate-grey">
+                                                    {item.course.name}
+                                                </td>
+                                                <td className="px-3 py-5 text-sm truncate text-slate-grey">
+                                                    {item.start_time.substring(
+                                                        0,
+                                                        5
+                                                    )}{" "}
+                                                    -{" "}
+                                                    {item.end_time.substring(
+                                                        0,
+                                                        5
+                                                    )}
+                                                </td>
+                                                <td className="px-3 py-5 text-sm truncate text-slate-grey">
+                                                    {item.room}
+                                                </td>
+                                                <td className="px-3 py-5 text-sm truncate text-slate-grey">
+                                                    {item.course.lecturer ? (
+                                                        item.course.lecturer
+                                                            .staffsite ? (
+                                                            <a
+                                                                href={
+                                                                    item.course
+                                                                        .lecturer
+                                                                        .staffsite
+                                                                }
+                                                                target="_blank"
+                                                                rel="noopener noreferrer"
+                                                                className="hover:underline"
+                                                            >
+                                                                {
+                                                                    item.course
+                                                                        .lecturer
+                                                                        .name
+                                                                }
+                                                            </a>
+                                                        ) : (
+                                                            item.course.lecturer
+                                                                .name
+                                                        )
+                                                    ) : (
+                                                        "-"
+                                                    )}
+                                                </td>
+                                            </tr>
+                                        ))}
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     )}
                     <p className="mt-8 text-sm text-slate-grey">
-                        Terakhir diupdate pada {dateTime(lastUpdate).date}. Informasi terbaru silakan
-                        kunjungi
+                        <span>{lastUpdate && `Terakhir diupdate pada ${dateTime(lastUpdate).date}. `}</span>
+                        Informasi terbaru silakan kunjungi
                         <a
                             href="http://baak.gunadarma.ac.id/"
                             target="_blank"

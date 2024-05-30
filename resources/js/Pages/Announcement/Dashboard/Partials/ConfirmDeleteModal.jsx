@@ -13,7 +13,7 @@ export default function ConfirmDeleteModal({
     return (
         <Modal show={show} onClose={onClose}>
             <form onSubmit={onDelete} className="p-6">
-                <p className="mt-1 text-gray-600">
+                <p className="mt-1 text-gray-600 break-words">
                     Apakah kamu yakin ingin menghapus{" "}
                     <strong>{titleDelete}</strong>?
                 </p>

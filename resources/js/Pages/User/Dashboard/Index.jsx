@@ -129,7 +129,7 @@ export default function Index({ auth, users }) {
                                                                         item.id
                                                                     )
                                                                 }
-                                                                className="px-3 py-1 text-xs font-semibold tracking-widest bg-red-500 rounded shadow-sm hover:bg-red-600 hover:shadow-md text-red-50"
+                                                                className="px-3 py-1 text-xs font-semibold tracking-widest transition-all duration-200 bg-red-500 rounded shadow-sm hover:bg-red-600 hover:shadow-md text-red-50"
                                                             >
                                                                 HAPUS
                                                             </button>

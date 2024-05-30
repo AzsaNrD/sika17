@@ -8,10 +8,6 @@ import BackButton from "@/Components/Atoms/BackButton";
 import TextInput from "@/Components/TextInput";
 
 export default function Create({ auth, schedule, courses }) {
-    console.log({
-        schedule,
-        courses,
-    });
     const { setData, data, put, errors, processing } = useForm({
         day: schedule.day,
         day_numeric: schedule.day_numeric,
@@ -53,7 +49,7 @@ export default function Create({ auth, schedule, courses }) {
                     Jadwal Kuliah
                 </h2>
             }
-            title="Pengumuman"
+            title="Jadwal Kuliah"
         >
             <div className="py-12">
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">

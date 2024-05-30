@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import Authenticated from "@/Layouts/AuthenticatedLayout";
-import { Link, useForm } from "@inertiajs/react";
-import { RxPencil2, RxTrash } from "react-icons/rx";
-import { FaPlus } from "react-icons/fa";
+import { useForm } from "@inertiajs/react";
 import PaginationLinks from "@/Components/Molecules/PaginationLinks";
 import { dateTime } from "@/Helpers/dateTime";
 import ConfirmDeleteModal from "@/Pages/Announcement/Dashboard/Partials/ConfirmDeleteModal";
+import AddButton from "@/Components/Molecules/AddButton";
+import EditButton from "@/Components/Atoms/EditButton";
+import DeleteButton from "@/Components/Atoms/DeleteButton";
 
 export default function Index({ auth, assignments }) {
     const [confirmingUserDeletion, setConfirmingUserDeletion] = useState(false);
@@ -49,18 +50,15 @@ export default function Index({ auth, assignments }) {
                     Tugas
                 </h2>
             }
-            title="Pengumuman"
+            title="Tugas"
         >
             <div className="py-12">
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <div className="flex items-center justify-end px-2 mb-4 sm:px-0">
-                        <Link
-                            href={route("dashboard.assignment.create")}
-                            className="flex items-center tracking-wide font-semibold gap-2 shadow-md hover:shadow-lg text-xs text-lilac-grey border-blue-violet bg-blue-violet hover:bg-blue-violet/90 transition-all duration-200 rounded-[5px] py-2 px-4"
-                        >
-                            <FaPlus />
-                            TAMBAH TUGAS
-                        </Link>
+                        <AddButton
+                            route={route("dashboard.assignment.create")}
+                            label="TAMBAH TUGAS"
+                        />
                     </div>
                     <div className="overflow-hidden shadow-universal bg-lilac-white sm:rounded-[5px]">
                         <div className="p-6 text-slate-grey">
@@ -70,10 +68,13 @@ export default function Index({ auth, assignments }) {
                                 </div>
                             ) : (
                                 <div className="overflow-x-auto">
-                                    <table>
+                                    <table className="w-full">
                                         <thead>
                                             <tr className="border-b border-[#BABABA]">
-                                                <th className="py-3 text-sm font-bold tracking-wide text-left wpx-3 text-gunmetal">
+                                                <th className="px-3 py-3 text-sm font-bold tracking-wide text-left wpx-3 text-gunmetal">
+                                                    #
+                                                </th>
+                                                <th className="px-3 py-3 text-sm font-bold tracking-wide text-left text-gunmetal">
                                                     MATA KULIAH
                                                 </th>
                                                 <th className="px-3 py-3 text-sm font-bold tracking-wide text-left text-gunmetal">
@@ -85,9 +86,6 @@ export default function Index({ auth, assignments }) {
                                                 <th className="px-3 py-3 text-sm font-bold tracking-wide text-left text-gunmetal">
                                                     TANGGAL DITAMBAH
                                                 </th>
-                                                <th className="px-3 py-3 text-sm font-bold tracking-wide text-left text-gunmetal">
-                                                    EDIT
-                                                </th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -98,13 +96,16 @@ export default function Index({ auth, assignments }) {
                                                         key={index}
                                                     >
                                                         <td className="px-3 py-5 text-sm text-slate-grey">
+                                                            {index + 1}
+                                                        </td>
+                                                        <td className="px-3 py-5 text-sm truncate text-slate-grey">
                                                             {item.course.name}
                                                         </td>
-                                                        <td className="px-3 py-5 text-sm text-slate-grey">
+                                                        <td className="px-3 py-5 text-sm truncate text-slate-grey max-w-80">
                                                             {item.submission_link ||
                                                                 "-"}
                                                         </td>
-                                                        <td className="px-3 py-5 text-sm text-slate-grey">
+                                                        <td className="px-3 py-5 text-sm truncate text-slate-grey">
                                                             {item.due_date !==
                                                             null ? (
                                                                 <>
@@ -125,7 +126,7 @@ export default function Index({ auth, assignments }) {
                                                                 "-"
                                                             )}
                                                         </td>
-                                                        <td className="px-3 py-5 text-sm text-slate-grey">
+                                                        <td className="px-3 py-5 text-sm truncate text-slate-grey">
                                                             {
                                                                 dateTime(
                                                                     item.created_at
@@ -139,17 +140,15 @@ export default function Index({ auth, assignments }) {
                                                             }{" "}
                                                             {" WIB"}
                                                         </td>
-                                                        <td className="flex items-center justify-center h-full py-5 text-lg gap-7 text-slate-grey">
-                                                            <Link
-                                                                href={route(
+                                                        <td className="flex items-center justify-center h-full gap-5 py-5 mx-3 text-lg text-slate-grey">
+                                                            <EditButton
+                                                                route={route(
                                                                     "dashboard.assignment.edit",
                                                                     item.id
                                                                 )}
-                                                            >
-                                                                <RxPencil2 />
-                                                            </Link>
-                                                            <button
-                                                                onClick={() =>
+                                                            />
+                                                            <DeleteButton
+                                                                onDelete={() =>
                                                                     confirmUserDeletion(
                                                                         item
                                                                             .course
@@ -157,9 +156,7 @@ export default function Index({ auth, assignments }) {
                                                                         item.id
                                                                     )
                                                                 }
-                                                            >
-                                                                <RxTrash />
-                                                            </button>
+                                                            />
                                                         </td>
                                                     </tr>
                                                 )

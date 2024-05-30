@@ -8,7 +8,6 @@ import InputError from "@/Components/InputError";
 import BackButton from "@/Components/Atoms/BackButton";
 
 export default function Edit({ auth, course, lecturers, semesters }) {
-    console.log(course);
     const { setData, data, put, errors, processing } = useForm({
         name: course.name,
         code: course.code || "",
@@ -31,16 +30,16 @@ export default function Edit({ auth, course, lecturers, semesters }) {
             user={auth.user}
             header={
                 <h2 className="text-xl font-semibold leading-tight text-gunmetal font-anonymous">
-                    Dosen
+                    Mata Kuliah
                 </h2>
             }
-            title="Pengumuman"
+            title="Mata Kuliah"
         >
             <div className="py-12">
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <div className="p-6 space-y-6 overflow-hidden shadow-universal bg-lilac-white sm:rounded-[5px]">
                         <div className="pb-3 text-lg font-bold tracking-wide uppercase border-b text-gunmetal">
-                            Edit Mata Kuliah Baru
+                            Edit Mata Kuliah
                         </div>
                         <div>
                             <form onSubmit={submit} className="mt-6 space-y-6">

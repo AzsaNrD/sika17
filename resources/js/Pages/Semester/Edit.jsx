@@ -26,7 +26,7 @@ export default function Edit({ auth, semester }) {
                     Semester
                 </h2>
             }
-            title="Pengumuman"
+            title="Semester"
         >
             <div className="py-12">
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
@@ -40,6 +40,7 @@ export default function Edit({ auth, semester }) {
                                     <InputLabel htmlFor="name" value="Nama" />
                                     <TextInput
                                         id="name"
+                                        autoComplete="name"
                                         className="block w-full mt-1 border border-[#ccced1] rounded-sm"
                                         onChange={(e) =>
                                             setData("name", e.target.value)

@@ -3,7 +3,7 @@ import Authenticated from "@/Layouts/AuthenticatedLayout";
 import InputLabel from "@/Components/InputLabel";
 import TextInput from "@/Components/TextInput";
 import PrimaryButton from "@/Components/PrimaryButton";
-import { Link, useForm } from "@inertiajs/react";
+import { useForm } from "@inertiajs/react";
 import InputError from "@/Components/InputError";
 import BackButton from "@/Components/Atoms/BackButton";
 
@@ -33,7 +33,7 @@ export default function Create({ auth, lecturers, semesters }) {
                     Mata Kuliah
                 </h2>
             }
-            title="Pengumuman"
+            title="Mata Kuliah"
         >
             <div className="py-12">
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">

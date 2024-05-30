@@ -40,12 +40,12 @@ export default function ErrorPage({ status }) {
                         {description}
                     </p>
                     {(status == 404 || status == 403) && (
-                        <Link
-                            href={route("home")}
-                            className="inline-block px-8 py-2 mx-auto mt-8 text-sm text-center transition-all duration-200 rounded-full text-lilac-grey bg-blue-violet hover:bg-blue-violet/90"
+                        <button
+                            onClick={() => window.history.back()}
+                            className="inline-block px-8 py-2 mx-auto mt-5 text-center transition-all duration-200 rounded-[5px] uppercase tracking-wider text-xs text-lilac-grey bg-blue-violet hover:bg-blue-violet/90"
                         >
-                            Kembali ke Beranda
-                        </Link>
+                            Kembali
+                        </button>
                     )}
                 </div>
             </div>

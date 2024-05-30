@@ -18,7 +18,7 @@ const AnnouncementList = ({ announcements }) => {
                                     ? "Admin"
                                     : item.user.role}
                             </p>
-                            <h2 className="font-medium uppercase text-slate-grey">
+                            <h2 className="font-medium uppercase break-words line-clamp-3 text-slate-grey">
                                 {item.title}
                             </h2>
                         </div>

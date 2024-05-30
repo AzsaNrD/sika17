@@ -16,7 +16,7 @@ export default function Edit({ auth, announcement }) {
 
     const submit = (e) => {
         e.preventDefault();
-        put(route("dashboard.announcement.update", announcement.slug));
+        put(route("dashboard.announcement.update", announcement.id));
     };
 
     return (

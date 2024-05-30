@@ -11,7 +11,7 @@ export default function Show({ courses, semester }) {
             <main className="max-w-5xl px-4 mx-auto my-10 sm:my-16 lg:px-0 min-h-svh">
                 <section>
                     <div className="flex items-center gap-1 text-sm select-none text-slate-grey">
-                        <Link href={route("course.index")} className="text-blue-violet hover:underline">Mata Kuliah</Link>
+                        <Link href={route("course.index")} className="text-blue-violet">Mata Kuliah</Link>
                         <RxCaretRight className="text-blue-violet" />
                         <span>Semester {semester}</span>
                     </div>
@@ -33,6 +33,7 @@ export default function Show({ courses, semester }) {
                                     key={index}
                                     title={item.name}
                                     lecturer={item.lecturer?.name || ""}
+                                    staffsite={item.lecturer?.staffsite || ""}
                                     materialLink={item.material_url || ""}
                                     rpsLink={item.rps || ""}
                                     vclassLink={item.vclass || ""}

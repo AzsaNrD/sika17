@@ -2,6 +2,8 @@ import React from "react";
 import { Link } from "@inertiajs/react";
 import { RxPencil2, RxTrash } from "react-icons/rx";
 import { dateTime } from "@/Helpers/dateTime";
+import EditButton from "@/Components/Atoms/EditButton";
+import DeleteButton from "@/Components/Atoms/DeleteButton";
 
 export default function AnnouncementTable({ announcements, onDelete }) {
     return (
@@ -10,16 +12,16 @@ export default function AnnouncementTable({ announcements, onDelete }) {
                 <thead>
                     <tr className="border-b border-[#BABABA]">
                         <th className="px-3 py-3 text-sm font-bold tracking-wide text-left text-gunmetal">
+                            #
+                        </th>
+                        <th className="px-3 py-3 text-sm font-bold tracking-wide text-left text-gunmetal">
                             JUDUL
                         </th>
-                        <th className="px-3 py-3 text-sm font-bold tracking-wide text-left text-gunmetal">
+                        <th className="px-3 py-3 text-sm font-bold tracking-wide text-left truncate text-gunmetal">
                             DIPOSTING OLEH
                         </th>
-                        <th className="px-3 py-3 text-sm font-bold tracking-wide text-left text-gunmetal">
+                        <th className="px-3 py-3 text-sm font-bold tracking-wide text-left truncate text-gunmetal">
                             TANGGAL
-                        </th>
-                        <th className="px-3 py-3 text-sm font-bold tracking-wide text-left text-gunmetal">
-                            EDIT
                         </th>
                     </tr>
                 </thead>
@@ -30,31 +32,30 @@ export default function AnnouncementTable({ announcements, onDelete }) {
                             key={index}
                         >
                             <td className="px-3 py-5 text-sm text-slate-grey">
+                                {index + 1}.
+                            </td>
+                            <td className="px-3 py-5 text-sm break-words truncate max-w-96 text-slate-grey">
                                 {item.title}
                             </td>
                             <td className="px-3 py-5 text-sm text-slate-grey">
                                 {item.user.name}
                             </td>
-                            <td className="px-3 py-5 text-sm text-slate-grey">
+                            <td className="px-3 py-5 text-sm truncate text-slate-grey">
                                 {dateTime(item.created_at).date} {" - "}{" "}
                                 {dateTime(item.created_at).time} {" WIB"}
                             </td>
-                            <td className="flex items-center justify-center h-full py-5 text-lg gap-7 text-slate-grey">
-                                <Link
-                                    href={route(
+                            <td className="flex items-center justify-center h-full gap-5 py-5 mx-3 text-lg text-slate-grey">
+                                <EditButton
+                                    route={route(
                                         "dashboard.announcement.edit",
                                         item.id
                                     )}
-                                >
-                                    <RxPencil2 />
-                                </Link>
-                                <button
-                                    onClick={() =>
+                                />
+                                <DeleteButton
+                                    onDelete={() =>
                                         onDelete(item.title, item.id)
                                     }
-                                >
-                                    <RxTrash />
-                                </button>
+                                />
                             </td>
                         </tr>
                     ))}

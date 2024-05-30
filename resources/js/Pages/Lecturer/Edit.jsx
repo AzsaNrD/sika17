@@ -26,7 +26,7 @@ export default function Edit({ auth, lecturer }) {
                     Dosen
                 </h2>
             }
-            title="Pengumuman"
+            title="Dosen"
         >
             <div className="py-12">
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
@@ -40,6 +40,7 @@ export default function Edit({ auth, lecturer }) {
                                     <InputLabel htmlFor="name" value="Nama" />
                                     <TextInput
                                         id="name"
+                                        autoComplete="name"
                                         className="block w-full mt-1 border border-[#ccced1] rounded-sm"
                                         onChange={(e) =>
                                             setData("name", e.target.value)
@@ -57,7 +58,7 @@ export default function Edit({ auth, lecturer }) {
                                     <InputLabel htmlFor="staffsite" value="Url Staffsite" />
                                     <TextInput
                                         id="staffsite"
-                                        value={data.staffsite}
+                                        value={data.staffsite || ""}
                                         className="block w-full mt-1 border border-[#ccced1] rounded-sm"
                                         onChange={(e) =>
                                             setData("staffsite", e.target.value)

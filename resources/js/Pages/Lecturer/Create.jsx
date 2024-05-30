@@ -26,7 +26,7 @@ export default function Create({ auth }) {
                     Dosen
                 </h2>
             }
-            title="Pengumuman"
+            title="Dosen"
         >
             <div className="py-12">
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">

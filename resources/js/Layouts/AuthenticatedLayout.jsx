@@ -261,6 +261,23 @@ export default function Authenticated({ user, header, title, children }) {
                                         {item.title}
                                     </ResponsiveNavLink>
                                 ))}
+                                {user.role === "Super Admin" &&
+                                    urlsSuperAdmin.map((item, index) => (
+                                        <ResponsiveNavLink
+                                            key={index}
+                                            href={route(item.routeName)}
+                                            active={
+                                                route().current(
+                                                    item.routeName
+                                                ) ||
+                                                component.startsWith(
+                                                    item.component
+                                                )
+                                            }
+                                        >
+                                            {item.title}
+                                        </ResponsiveNavLink>
+                                    ))}
                             </div>
                         )}
 

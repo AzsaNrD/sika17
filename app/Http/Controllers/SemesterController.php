@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Semester;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Inertia\Inertia;
 
 class SemesterController extends Controller
@@ -33,7 +34,13 @@ class SemesterController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|numeric|min:1|max:8|unique:semesters,name',
-            'is_active' => 'required|boolean',
+            'is_active' => [
+                'required',
+                'boolean',
+                Rule::unique('semesters')->where(function ($query) {
+                    return $query->where('is_active', true);
+                }),
+            ],
         ]);
 
         Semester::create($validated);
@@ -66,7 +73,13 @@ class SemesterController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|numeric|min:1|max:8',
-            'is_active' => 'required|boolean',
+            'is_active' => [
+                'required',
+                'boolean',
+                Rule::unique('semesters')->where(function ($query) {
+                    return $query->where('is_active', true);
+                }),
+            ],
         ]);
 
         $semester->update($validated);

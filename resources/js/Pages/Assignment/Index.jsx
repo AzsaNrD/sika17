@@ -11,9 +11,15 @@ export default function Index({ assignments }) {
                     <h2 className="text-xl font-bold text-gunmetal">
                         DAFTAR TUGAS
                     </h2>
-                    <p className="mt-4 text-sm text-slate-grey">
-                        Berikut adalah daftar tugas yang perlu diselesaikan.
-                    </p>
+                    {assignments.data.length === 0 ? (
+                        <p className="mt-4 text-sm text-slate-grey">
+                            Belum ada tugas.
+                        </p>
+                    ) : (
+                        <p className="mt-4 text-sm text-slate-grey">
+                            Berikut adalah daftar tugas yang perlu diselesaikan. (sebaiknya jangan terlalu santai 💀)
+                        </p>
+                    )}
                 </section>
                 <section>
                     <div className="flex flex-col gap-4 mt-4">
@@ -22,7 +28,11 @@ export default function Index({ assignments }) {
                         ))}
                     </div>
                     <div className="flex items-center justify-center gap-3 mt-11">
-                        <PaginationLinks links={assignments.links} currentPage={assignments.current_page} lastPage={assignments.last_page} />
+                        <PaginationLinks
+                            links={assignments.links}
+                            currentPage={assignments.current_page}
+                            lastPage={assignments.last_page}
+                        />
                     </div>
                 </section>
             </main>

@@ -26,7 +26,7 @@ export default function Edit({ auth, shortcut }) {
                     Menu Pintasan
                 </h2>
             }
-            title="Pengumuman"
+            title="Menu Pintasan"
         >
             <div className="py-12">
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">

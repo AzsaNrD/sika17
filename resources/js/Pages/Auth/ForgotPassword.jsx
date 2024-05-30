@@ -18,14 +18,14 @@ export default function ForgotPassword({ status }) {
     return (
         <GuestLayout title="Forgot Password">
             {status && (
-                <div className="mb-4 text-sm font-medium text-green-600">
+                <div className="mt-5 text-sm font-medium text-center text-green-600">
                     {status}
                 </div>
             )}
 
             <form
                 onSubmit={submit}
-                className="bg-[#FDFBFF] transition-all duration-200 shadow-universal p-8 shadow-md mt-7 sm:max-w-2xl sm:rounded-[5px] w-full mx-auto"
+                className="bg-[#FDFBFF] transition-all duration-200 shadow-universal p-8 shadow-md mt-5 sm:max-w-2xl sm:rounded-[5px] w-full mx-auto"
             >
                 <div className="mb-4 text-sm text-gray-600">
                     Forgot your password? No problem. Just let us know your

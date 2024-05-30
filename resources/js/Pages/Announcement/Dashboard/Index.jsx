@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import Authenticated from "@/Layouts/AuthenticatedLayout";
-import { Link, useForm } from "@inertiajs/react";
-import { RxPlusCircled } from "react-icons/rx";
+import { useForm } from "@inertiajs/react";
 import AnnouncementTable from "./Partials/AnnouncementTable";
 import ConfirmDeleteModal from "./Partials/ConfirmDeleteModal";
 import PaginationLinks from "@/Components/Molecules/PaginationLinks";
+import AddButton from "@/Components/Molecules/AddButton";
 
 export default function Index({ auth, announcements }) {
     const [confirmingUserDeletion, setConfirmingUserDeletion] = useState(false);
@@ -53,13 +53,7 @@ export default function Index({ auth, announcements }) {
             <div className="py-12">
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <div className="flex items-center justify-end px-2 mb-4 sm:px-0">
-                        <Link
-                            href={route("dashboard.announcement.create")}
-                            className="flex items-center tracking-wide gap-2 shadow-md hover:shadow-lg text-sm text-lilac-grey border-blue-violet bg-blue-violet hover:bg-blue-violet/90 transition-all duration-200 rounded-[5px] py-2 px-4"
-                        >
-                            <RxPlusCircled />
-                            Tambah Pengumuman
-                        </Link>
+                        <AddButton route={route("dashboard.announcement.create")} label="TAMBAH PENGUMUMAN" />
                     </div>
                     <div className="overflow-hidden shadow-universal bg-lilac-white sm:rounded-[5px]">
                         <div className="p-6 text-slate-grey">

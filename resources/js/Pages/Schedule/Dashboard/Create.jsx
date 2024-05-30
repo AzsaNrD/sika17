@@ -48,7 +48,7 @@ export default function Create({ auth, courses }) {
                     Jadwal Kuliah
                 </h2>
             }
-            title="Pengumuman"
+            title="Jadwal Kuliah"
         >
             <div className="py-12">
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
